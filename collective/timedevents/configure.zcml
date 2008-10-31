@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">    
+    xmlns:five="http://namespaces.zope.org/five">
+
+    <browser:page
+       for="*"
+       name="tick"
+       class=".views.TickTriggerView"
+       permission="cmf.ManagePortal"
+       />
+       
+	<subscriber
+		      handler="collective.timedevents.events.tick_logger"
+		      for=".interfaces.ITickEvent"
+		    />
+
+</configure>
