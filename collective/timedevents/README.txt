@@ -4,10 +4,10 @@ collective.timedevents Package Readme
 Overview
 --------
 
-collective.timedevents fires clock based Zope 3 events. They can make Zope application react to the computer clock.
-This is useful for creating services where something must happen regurlarly or after a certain period of time has expired.
+collective.timedevents fires clock based Zope 3 events. They can make Zope application react to timers.
+This is useful for creating services where something must happen regurlarly or after a certain period has expired.
 
-This is a developer level product.
+This is a developer level product. This product is indended to replace Products.TickingMachine with more robust Zope 3 codebase.
 
 Usage
 -----
@@ -24,7 +24,8 @@ Usage
         ...
 	    collective.timedevents
 	    
-  Add clock server to tick timedevents subscribers::
+  Add clock server to tick timedevents subscribers - use your Plone instance name::
+
 	  [instance]
 	  ...
 		  zope-conf-additional =
@@ -36,32 +37,34 @@ Usage
 		      host localhost
 		  </clock-server>
 	    
-2. Add collective.timedevents.interfaces.ITickEvent subscribers to your product ZCML declarations::
+2. Add collective.timedevents.interfaces.ITickEvent subscribers to your product ZCML declarations.
 
-   <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="harvinaiset.app">
+   Example::
 
-		<subscriber
-		      handler="myproduct.tickers.on_tick"
-		      for="collective.timedevents.intefaces.ITickEvent"
-		    />
-
-    </configure>
+	   <configure
+	   xmlns="http://namespaces.zope.org/zope"
+	   xmlns:browser="http://namespaces.zope.org/browser"
+	   i18n_domain="harvinaiset.app">
+	
+			<subscriber
+			      handler="myproduct.tickers.on_tick"
+			      for="collective.timedevents.intefaces.ITickEvent"
+			    />
+	
+	   </configure>
     
 3. Configure your event handler to react after certain period has expired::
 
-    from zope.app.component.hooks import getSite
-
-    def on_tick(event):
-    
-        interval_in_days = 1.0 / 24.0 # One hour, floating point
-        context = site.my_magic_context
-        if event.last_tick > context.last_action + interval_in_days:
-            do_stuff()
-            context.last_action = event.last_tick
-         
+	    from zope.app.component.hooks import getSite
+	
+	    def on_tick(event):
+	        """ Do something after one hour has elapsed """
+	        interval_in_days = 1.0 / 24.0 # One hour, floating point
+	        context = site.my_magic_context # Persistent object which stores our timing data
+	        if event.last_tick > context.last_action + interval_in_days: # Check whether enough time has elaped
+	            do_stuff()
+	            context.last_action = event.last_tick # Store when we last time did something
+	         
 
 
 Other
@@ -85,6 +88,11 @@ This product fills the following quality criteria:
 * Commented code
 
 * PyPi eggs provided
+
+Future
+------
+
+Cron like "on day/hour/minute X" like subscribers could be added. 
 
 Author
 ------
