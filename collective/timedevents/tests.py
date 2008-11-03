@@ -61,7 +61,7 @@ class TickTestCase(ptc.PloneTestCase):
         pass
         
         
-    def x_test_url(self):
+    def test_url(self):
         """ Test that the tick view URL is exposed properly. """
         
         self.loginAsPortalOwner()
@@ -70,8 +70,9 @@ class TickTestCase(ptc.PloneTestCase):
         view = portal.restrictedTraverse('tick')
         view()
         
-    def x_test_security(self):
-
+    def test_security(self):
+        """ Check that only admin can execute tick. """
+        
         try:
             portal = self.portal
             view = portal.restrictedTraverse('@@tick')
