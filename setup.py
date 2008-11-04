@@ -6,8 +6,7 @@ version = '0.1.1'
 setup(name='collective.timedevents',
       version=version,
       description="Plone/Zope time based event mechanism",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.txt").read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
@@ -16,7 +15,7 @@ setup(name='collective.timedevents',
       keywords='plone zope event clock time subscriber date day',
       author='Mikko Ohtamaa',
       author_email='mikko.ohtamaa@twinapex.com',
-      url='http://www.twinapex.com',
+      url='http://plone.org/products/collective-timedevents',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective'],
