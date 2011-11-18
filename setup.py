@@ -28,7 +28,5 @@ setup(name='collective.timedevents',
       ],
       entry_points="""
       # -*- Entry points: -*-
-      [z3c.autoinclude.plugin]
-      target = plone
       """,
       )
