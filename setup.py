@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1.1'
+version = '0.2'
 
 setup(name='collective.timedevents',
       version=version,
@@ -23,9 +23,12 @@ setup(name='collective.timedevents',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'zope.app.session',
           # -*- Extra requirements: -*-
       ],
       entry_points="""
       # -*- Entry points: -*-
+      [z3c.autoinclude.plugin]
+      target = plone
       """,
       )

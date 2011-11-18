@@ -15,9 +15,9 @@ import logging
 from DateTime.DateTime import DateTime
 from zope.event import notify
 from Products.Five.browser import BrowserView
-from zope.app.session.interfaces import ISession, ISessionDataContainer
+#from zope.app.session.interfaces import ISession, ISessionDataContainer
 from zope import component
-from zope.app import zapi
+#from zope.app import zapi
 from zope.app.session.session import SessionData, PersistentSessionDataContainer, RAMSessionDataContainer
 
 # Local imports
