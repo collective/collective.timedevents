@@ -59,12 +59,12 @@ class TickTriggerView(BrowserView):
         # Make sure persistent data is not cleared between clock pulses        
         sdc.timeout = self.interval * 3
         client_id = "tick-data:" + self.context.absolute_url()
-        if not client_id in sdc:            
-            sdc[client_id] = SessionData()
-            
-            
-        container = sdc[client_id]
-    
+
+        try:    
+            container = sdc[client_id]
+        except KeyError:
+            container = sdc[client_id] = SessionData()
+   
         if not "interval" in container:
             # Initialize data
             container["interval"] = self.interval
