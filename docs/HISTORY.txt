@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.2.1 (unreleased)
+------------------
+
+* Added possibility to change logging level for tick_logger
+  [vmaksymiv]
+
+0.2 (unreleased)
+----------------
+
+* Added compatibility with Plone 4
+  [kroman0]
+
 0.1 - 0.1.1
 -----------
 

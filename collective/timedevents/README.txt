@@ -65,6 +65,14 @@ Usage
 	            do_stuff()
 	            context.last_action = event.last_tick # Store when we last time did something
 	         
+4. You can also to change logging level for logger who log all ticks::
+   Just add environment variable TICK_LOGGER_LEVEL to instance part in your buildout.cfg
+   
+   Example::
+
+       [instance]
+
+       environment-vars += TICK_LOGGER_LEVEL DEBUG
 
 
 Other
