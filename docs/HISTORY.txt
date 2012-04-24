@@ -1,20 +1,21 @@
 Changelog
 =========
 
-0.2.1 (unreleased)
+0.2.1 (2012-04-24)
 ------------------
 
-* Added possibility to change logging level for tick_logger
+* Added logging level option for tick_logger
   [vmaksymiv]
+* Bugfix: data storage 
 
-0.2 (unreleased)
+0.2 
 ----------------
 
-* Added compatibility with Plone 4
+* Added Plone 4 compatibility  
   [kroman0]
 
-0.1 - 0.1.1
------------
+0.1.1 (2008-11-04)
+------------------
 
 * PyPi egg fixes
 
