@@ -1,6 +1,6 @@
 """
     Time based events
-    
+
     http://www.twinapex.com
 
 """
@@ -15,12 +15,18 @@ import os
 import logging
 
 # Zope imports
-import zope
+from zope.interface import implements
 from DateTime import DateTime
 from zope.component import adapter
 
 # Local imports
-from interfaces import ITickEvent
+from interfaces import (ITickEvent,
+                        IIntervalTicksGenericEvent,
+                        IIntervalTicks15Event,
+                        IIntervalTicksHourlyEvent,
+                        IIntervalTicksDailyEvent,
+                        IIntervalTicksWeeklyEvent,
+                        IIntervalTicksMonthlyEvent)
 
 LOGGING_LEVEL = {'DEBUG': logging.DEBUG,
                  'INFO': logging.INFO,
@@ -35,7 +41,7 @@ LOGGING_LEVEL = {'DEBUG': logging.DEBUG,
 class TickEvent(object):
     """This class implements the ITickEvent interface.
     """
-    zope.interface.implements(ITickEvent)
+    implements(ITickEvent)
 
     def __init__(self, date_time, next_tick):
         self.date_time = DateTime(date_time)
@@ -48,6 +54,63 @@ def tick_logger(tick_event):
        ticks.
     """
 
-    l = logging.getLogger('timedevents')
+    l = logging.getLogger('collective.timedevents')
     l.log(LOGGING_LEVEL, '(%s) TICK detected.' % tick_event.date_time.ISO())
+
+
+class IntervalTicksGenericEvent(object):
+    '''
+    IntervalTicks generic event
+    '''
+
+    implements(IIntervalTicksGenericEvent)
+
+    def __init__(self, context):
+        self.context = context
+
+
+class IntervalTicks15Event(IntervalTicksGenericEvent):
+    '''
+    An Event that will be fired every 15 minutes from a cronjob
+
+    '''
+
+    implements(IIntervalTicks15Event)
+
+
+class IntervalTicksHourlyEvent(IntervalTicksGenericEvent):
+    '''
+    An Event that will be fired hourly from a cronjob
+
+    '''
+
+    implements(IIntervalTicksHourlyEvent)
+
+
+class IntervalTicksDailyEvent(IntervalTicksGenericEvent):
+    '''
+    An Event that will be fired daily from a cronjob
+
+    '''
+
+    implements(IIntervalTicksDailyEvent)
+
+
+class IntervalTicksWeeklyEvent(IntervalTicksGenericEvent):
+    '''
+    An Event that will be fired weekly from a cronjob
+
+    '''
+
+    implements(IIntervalTicksWeeklyEvent)
+
+
+class IntervalTicksMonthlyEvent(IntervalTicksGenericEvent):
+    '''
+    An Event that will be fired monthly from a cronjob
+
+    '''
+
+    implements(IIntervalTicksMonthlyEvent)
+
 

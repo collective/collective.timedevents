@@ -1,19 +1,60 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:plone="http://namespaces.plone.org/plone">    
+    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:five="http://namespaces.zope.org/five">
 
     <include package="Products.CMFCore" file="permissions.zcml"
            xmlns:zcml="http://namespaces.zope.org/zcml"
            zcml:condition="have plone-41" />
+
     <browser:page
        for="*"
        name="tick"
        class=".views.TickTriggerView"
        permission="cmf.ManagePortal"
        />
-       
+
+    <browser:page
+        for="*"
+        name="tick_fifteen"
+        class=".views.IntervalTicksView"
+        attribute="fifteenMinutes"
+        permission="cmf.ManagePortal"
+    />
+
+    <browser:page
+        for="*"
+        name="tick_hourly"
+        class=".views.IntervalTicksView"
+        attribute="hourly"
+        permission="cmf.ManagePortal"
+    />
+
+    <browser:page
+        for="*"
+        name="tick_daily"
+        class=".views.IntervalTicksView"
+        attribute="daily"
+        permission="cmf.ManagePortal"
+    />
+
+    <browser:page
+        for="*"
+        name="tick_weekly"
+        class=".views.IntervalTicksView"
+        attribute="weekly"
+        permission="cmf.ManagePortal"
+    />
+
+    <browser:page
+        for="*"
+        name="tick_monthly"
+        class=".views.IntervalTicksView"
+        attribute="monthly"
+        permission="cmf.ManagePortal"
+    />
+
 	<subscriber
 		      handler="collective.timedevents.events.tick_logger"
 		      for=".interfaces.ITickEvent"
