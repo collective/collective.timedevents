@@ -1,17 +1,23 @@
 Changelog
 =========
 
+0.3 (2013-10-21)
+------------------
+
+* Added cron-style tick events, to be triggered by cron or clockserver, with no internal calculation of interval. Updated readme and tests.
+  [sunew]
+
 0.2.1 (2012-04-24)
 ------------------
 
 * Added logging level option for tick_logger
   [vmaksymiv]
-* Bugfix: data storage 
+* Bugfix: data storage
 
-0.2 
+0.2
 ----------------
 
-* Added Plone 4 compatibility  
+* Added Plone 4 compatibility
   [kroman0]
 
 0.1.1 (2008-11-04)
