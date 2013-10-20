@@ -18,13 +18,11 @@ b) Subscribing to any of the cron-style IIntervalTicks*-events, not worrying abo
 Installation
 ------------
 
-1. Add collective.timedevents to your buildout
+1. Add collective.timedevents to your buildout by adding the egg to your buildout.cfg::
 
-  Add the following to your buildout.cfg::
-
-    eggs =
-        ...
-        collective.timedevents
+          eggs =
+             ...
+             collective.timedevents
 
 
 2. Trigger
@@ -33,16 +31,16 @@ Installation
 
   Add clock server to tick timedevents subscribers - use your Plone instance name::
 
-      [instance]
-      ...
-          zope-conf-additional =
-          <clock-server>
-              method /mysite/@@tick
-              period 90
-              user clockserver-user
-              password password
-              host localhost
-          </clock-server>
+          [instance]
+          ...
+              zope-conf-additional =
+              <clock-server>
+                  method /mysite/@@tick
+                  period 90
+                  user clockserver-user
+                  password password
+                  host localhost
+              </clock-server>
 
   Or for the cron-like interval-based events, here 900 seconds for the 15-minute event::
 
