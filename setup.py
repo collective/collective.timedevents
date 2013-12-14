@@ -6,7 +6,7 @@ version = '0.3'
 setup(name='collective.timedevents',
       version=version,
       description="Plone/Zope time based event mechanism",
-      long_description=open("README.md").read(),
+      long_description=open("README.rst").read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Programming Language :: Python",
