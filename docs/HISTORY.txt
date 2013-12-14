@@ -1,8 +1,11 @@
 Changelog
 =========
 
-0.3 (2013-10-21)
+0.3 (unreleased)
 ------------------
+
+* Travis CI integration
+  [hvelarde]
 
 * Added cron-style tick events, to be triggered by cron or clockserver, with no internal calculation of interval. Updated readme and tests.
   [sunew]
