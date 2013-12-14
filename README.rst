@@ -23,6 +23,11 @@ b) Subscribing to any of the cron-style IIntervalTicks\*-events, not
    montly) a cron-job as trigger makes most sense, in case of zope
    restarts.
 
+Tested by Travis:
+
+.. image:: https://secure.travis-ci.org/collective/collective.timedevents.png?branch=master
+   :target: https://travis-ci.org/#!/collective/collective.timedevents
+
 Installation
 ------------
 
@@ -69,12 +74,10 @@ Usage
 
 Subscribe to the events/ticks you need.
 
-Using the ITickEvent method::
+A. Using the ITickEvent method:
 
-1. Add collective.timedevents.interfaces.ITickEvent subscribers to your
-   product ZCML declarations.
-
-Example::
+  1. Add collective.timedevents.interfaces.ITickEvent subscribers to your
+     product ZCML declarations::
 
        <configure
        xmlns="http://namespaces.zope.org/zope"
@@ -88,8 +91,8 @@ Example::
 
        </configure>
 
-2. Configure your event handler to react after certain period has
-   expired::
+  2. Configure your event handler to react after certain period has
+     expired::
 
        from zope.app.component.hooks import getSite
 
@@ -101,12 +104,10 @@ Example::
                do_stuff()
                context.last_action = event.last_tick # Store when we last time did something
 
-Using the IIntervalTicks\*-events::
+B. Using the IIntervalTicks\*-events:
 
-Add collective.timedevents.interfaces.IIntervalTicks\* subscribers to
-your module ZCML declarations.
-
-Example::
+  Add collective.timedevents.interfaces.IIntervalTicks\* subscribers to
+  your module ZCML declarations::
 
        <configure
        xmlns="http://namespaces.zope.org/zope"
