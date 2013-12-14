@@ -29,8 +29,6 @@ Installation
 1. Add collective.timedevents to your buildout by adding the egg to your
    buildout.cfg::
 
-   ::
-
          eggs =
             ...
             collective.timedevents
@@ -41,8 +39,6 @@ Can either be cron-jobs or zope clock-server.
 
 Add clock server to tick timedevents subscribers - use your Plone
 instance name::
-
-::
 
           [instance]
           ...
@@ -57,8 +53,6 @@ instance name::
 
 Or for the cron-like interval-based events, here 900 seconds for the
 15-minute event::
-
-::
 
           <clock-server>
             method /mysite/@@tick_fifteen
@@ -81,8 +75,6 @@ Using the ITickEvent method::
    product ZCML declarations.
 
 Example::
-
-::
 
        <configure
        xmlns="http://namespaces.zope.org/zope"
@@ -117,8 +109,6 @@ Add collective.timedevents.interfaces.IIntervalTicks\* subscribers to
 your module ZCML declarations.
 
 Example::
-
-::
 
        <configure
        xmlns="http://namespaces.zope.org/zope"
