@@ -28,6 +28,8 @@ Tested by Travis:
 .. image:: https://secure.travis-ci.org/collective/collective.timedevents.png?branch=master
    :target: https://travis-ci.org/#!/collective/collective.timedevents
 
+.. contents:: Table of contents
+
 Installation
 ------------
 
