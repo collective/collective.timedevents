@@ -91,8 +91,6 @@ Example::
 2. Configure your event handler to react after certain period has
    expired::
 
-   ::
-
        from zope.app.component.hooks import getSite
 
        def on_tick(event):
