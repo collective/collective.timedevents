@@ -10,8 +10,6 @@ __copyright__ = "Copyright 2008 Twinapex Research"
 __license__ = "GPL"
 __docformat__ = "epytext"
 
-import unittest
-
 from AccessControl import Unauthorized
 from Products.Five import zcml
 from zope import component
@@ -44,12 +42,11 @@ setup()
 ptc.setupPloneSite(products=["collective.timedevents"])
 
 INTERVALVIEWS = [
-         ('@@tick_fifteen', IIntervalTicks15Event),
-         ('@@tick_hourly', IIntervalTicksHourlyEvent),
-         ('@@tick_daily', IIntervalTicksDailyEvent),
-         ('@@tick_weekly', IIntervalTicksWeeklyEvent),
-         ('@@tick_monthly', IIntervalTicksMonthlyEvent),
-        ]
+    ('@@tick_fifteen', IIntervalTicks15Event),
+    ('@@tick_hourly', IIntervalTicksHourlyEvent),
+    ('@@tick_daily', IIntervalTicksDailyEvent),
+    ('@@tick_weekly', IIntervalTicksWeeklyEvent),
+    ('@@tick_monthly', IIntervalTicksMonthlyEvent), ]
 
 
 class TickTestCase(ptc.PloneTestCase):

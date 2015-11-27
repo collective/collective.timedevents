@@ -115,8 +115,8 @@ class TickTriggerView(BrowserView):
         # execute _notify(). Otherwise do nothing.
         if current.timeTime() - last.timeTime() >= 0.9 * interval:
             self.setLastTick(current)
-            notify(TickEvent(current,self.getNextTickEstimation(
-                                         last_tick=current, interval=interval)))
+            notify(TickEvent(current, self.getNextTickEstimation(
+                last_tick=current, interval=interval)))
 
     def getNextTickEstimation(self, last_tick=None, interval=None):
         """This method tries to estimate a time when a next tick will occur.
@@ -135,7 +135,6 @@ class TickTriggerView(BrowserView):
         next_tick_estimation = last_tick + interval
 
         return next_tick_estimation
-
 
     def __call__(self):
         self.tick()
