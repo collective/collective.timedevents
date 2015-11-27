@@ -64,7 +64,7 @@ class TickTriggerView(BrowserView):
     """
 
     # Interval between send tick events in seconds
-    interval  = 10
+    interval = 10
 
     def getTickData(self):
         """ Lazily initialize run-time tick data.
@@ -81,7 +81,7 @@ class TickTriggerView(BrowserView):
         except KeyError:
             container = sdc[client_id] = SessionData()
 
-        if not "interval" in container:
+        if "interval" not in container:
             # Initialize data
             container["interval"] = self.interval
             container["last_tick"] = None
@@ -114,7 +114,6 @@ class TickTriggerView(BrowserView):
         interval = self.getInterval()
         if interval < 0:
             interval = 0
-
 
         # If current time less lastTick is equal to or greater than
         # (0.9 * interval) then set lastTick to the current time and

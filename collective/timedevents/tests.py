@@ -84,7 +84,7 @@ class TickTestCase(ptc.PloneTestCase):
         """ Check that only admin can execute tick. """
         try:
             portal = self.portal
-            view = portal.restrictedTraverse('@@tick')
+            portal.restrictedTraverse('@@tick')
             raise AssertionError("Anonymous could tick")
         except Unauthorized:
             pass
@@ -94,7 +94,7 @@ class TickTestCase(ptc.PloneTestCase):
         for v in INTERVALVIEWS:
             try:
                 portal = self.portal
-                view = portal.restrictedTraverse(v[0])
+                portal.restrictedTraverse(v[0])
                 raise AssertionError("Anonymous could tick")
             except Unauthorized:
                 pass
