@@ -4,7 +4,8 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Plone 5 compatibility
+  [karalics]
 
 
 0.3 (2013-12-14)
