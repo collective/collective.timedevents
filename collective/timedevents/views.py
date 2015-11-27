@@ -18,8 +18,8 @@ from zope.event import notify
 from zope.interface import implements
 from zope.interface import alsoProvides
 try:
-     from plone.protect.interfaces import IDisableCSRFProtection
-     HAS_PROTECT = True
+    from plone.protect.interfaces import IDisableCSRFProtection
+    HAS_PROTECT = True
 except ImportError:
     HAS_PROTECT = False
 from Products.Five.browser import BrowserView
