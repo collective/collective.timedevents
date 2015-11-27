@@ -11,6 +11,7 @@ __docformat__ = "epytext"
 
 from zope.interface import Interface, Attribute
 
+
 class ITickEvent(Interface):
     '''An event signaling a tick (vide the TickingMachine class).
     '''
@@ -23,7 +24,7 @@ class IIntervalTicksGenericEvent(Interface):
     Generic cron event
     '''
 
-    context   = Attribute('An acquisition context to be passed to the cron handler')
+    context = Attribute('An acquisition context to be passed to the cron handler')
 
 
 class IIntervalTicks15Event(IIntervalTicksGenericEvent):
@@ -32,11 +33,13 @@ class IIntervalTicks15Event(IIntervalTicksGenericEvent):
 
     '''
 
+
 class IIntervalTicksHourlyEvent(IIntervalTicksGenericEvent):
     '''
     An Event that will be fired hourly from a cronjob
 
     '''
+
 
 class IIntervalTicksDailyEvent(IIntervalTicksGenericEvent):
     '''
@@ -44,17 +47,20 @@ class IIntervalTicksDailyEvent(IIntervalTicksGenericEvent):
 
     '''
 
+
 class IIntervalTicksWeeklyEvent(IIntervalTicksGenericEvent):
     '''
     An Event that will be fired weekly from a cronjob
 
     '''
 
+
 class IIntervalTicksMonthlyEvent(IIntervalTicksGenericEvent):
     '''
     An Event that will be fired monthly from a cronjob
 
     '''
+
 
 class IIntervalTicks(Interface):
     '''
