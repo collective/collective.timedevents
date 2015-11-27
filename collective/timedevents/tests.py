@@ -30,6 +30,7 @@ from Products.PloneTestCase import PloneTestCase as ptc
 
 from Products.PloneTestCase.layer import onsetup
 
+
 @onsetup
 def setup():
     fiveconfigure.debug_mode = True
@@ -49,6 +50,7 @@ INTERVALVIEWS = [
          ('@@tick_weekly', IIntervalTicksWeeklyEvent),
          ('@@tick_monthly', IIntervalTicksMonthlyEvent),
         ]
+
 
 class TickTestCase(ptc.PloneTestCase):
     """ Test ticking services
@@ -162,12 +164,3 @@ class TickTestCase(ptc.PloneTestCase):
 
         # Must unregister, otherwise piclking errors - ZODB tries to store this entry?
         component.getSiteManager().unregisterHandler(my_tick, [v[1]])
-
-
-def test_suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(TickTestCase))
-    return suite
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')

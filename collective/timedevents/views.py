@@ -8,6 +8,7 @@ __copyright__ = "Copyright 2008 Twinapex Research"
 __license__ = "GPL"
 __docformat__ = "epytext"
 
+
 import logging
 import time
 
@@ -39,6 +40,7 @@ package_id = "collective.timedevents"
 from events import LOGGING_LEVEL
 logger = logging.getLogger('collective.timedevents')
 
+
 class TickData:
     """ Persistent information about ticking. """
 
@@ -46,8 +48,10 @@ class TickData:
         self.interval = interval
         self.last_tick = None
 
+
 # We fake a persistent session using constant client id
 sdc = PersistentSessionDataContainer()
+
 
 class TickTriggerView(BrowserView):
     """ View that is called by Zope clock server.
@@ -118,8 +122,7 @@ class TickTriggerView(BrowserView):
         if current.timeTime() - last.timeTime() >= 0.9 * interval:
             self.setLastTick(current)
             notify(TickEvent(current,self.getNextTickEstimation(
-                                         last_tick=current,interval=interval)))
-
+                                         last_tick=current, interval=interval)))
 
     def getNextTickEstimation(self, last_tick=None, interval=None):
         """This method tries to estimate a time when a next tick will occur.
@@ -157,7 +160,6 @@ class IntervalTicksView(BrowserView):
 
     implements(IIntervalTicks)
 
-
     def fifteenMinutes(self):
         '''
         cron job every 15 minutes
@@ -188,7 +190,6 @@ class IntervalTicksView(BrowserView):
             alsoProvides(self.request, IDisableCSRFProtection)
         return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
 
-
     def weekly(self):
         '''
         weekly cron job
@@ -198,7 +199,6 @@ class IntervalTicksView(BrowserView):
         if HAS_PROTECT:
             alsoProvides(self.request, IDisableCSRFProtection)
         return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
-
 
     def monthly(self):
         '''

@@ -10,6 +10,7 @@ __copyright__ = "Copyright 2008 Twinapex Research"
 __license__ = "GPL"
 __docformat__ = "epytext"
 
+
 # Python imports
 import os
 import logging
@@ -112,5 +113,3 @@ class IntervalTicksMonthlyEvent(IntervalTicksGenericEvent):
     '''
 
     implements(IIntervalTicksMonthlyEvent)
-
-
