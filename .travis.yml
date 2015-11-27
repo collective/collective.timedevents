@@ -12,7 +12,7 @@ matrix:
       env: PLONE_VERSION=4.1
 install:
   - sed -ie "s#travis-4.x.cfg#travis-$PLONE_VERSION.x.cfg#" travis.cfg
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then echo 'plone.recipe.codeanalysis = 1.1' >> travis.cfg
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then echo 'plone.recipe.codeanalysis = 1.1' >> travis.cfg; fi
   - mkdir -p buildout-cache/downloads
   - python bootstrap.py -c travis.cfg
   - bin/buildout -c travis.cfg annotate
