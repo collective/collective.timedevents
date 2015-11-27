@@ -16,6 +16,12 @@ import time
 from DateTime.DateTime import DateTime
 from zope.event import notify
 from zope.interface import implements
+from zope.interface import alsoProvides
+try:
+     from plone.protect.interfaces import IDisableCSRFProtection
+     HAS_PROTECT = True
+except ImportError:
+    HAS_PROTECT = False
 from Products.Five.browser import BrowserView
 from zope.app.session.session import SessionData, PersistentSessionDataContainer
 
@@ -158,6 +164,8 @@ class IntervalTicksView(BrowserView):
         '''
         logger.log(LOGGING_LEVEL, 'Firing IntervalTicks15Event')
         notify(IntervalTicks15Event(context=self.context))
+        if HAS_PROTECT:
+            alsoProvides(self.request, IDisableCSRFProtection)
         return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
 
     def hourly(self):
@@ -166,6 +174,8 @@ class IntervalTicksView(BrowserView):
         '''
         logger.log(LOGGING_LEVEL, 'Firing IntervalTicksHourlyEvent')
         notify(IntervalTicksHourlyEvent(context=self.context))
+        if HAS_PROTECT:
+            alsoProvides(self.request, IDisableCSRFProtection)
         return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
 
     def daily(self):
@@ -174,6 +184,8 @@ class IntervalTicksView(BrowserView):
         '''
         logger.log(LOGGING_LEVEL, 'Firing IntervalTicksDailyEvent')
         notify(IntervalTicksDailyEvent(context=self.context))
+        if HAS_PROTECT:
+            alsoProvides(self.request, IDisableCSRFProtection)
         return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
 
     def weekly(self):
@@ -182,6 +194,8 @@ class IntervalTicksView(BrowserView):
         '''
         logger.log(LOGGING_LEVEL, 'Firing IntervalTicksWeeklyEvent')
         notify(IntervalTicksWeeklyEvent(context=self.context))
+        if HAS_PROTECT:
+            alsoProvides(self.request, IDisableCSRFProtection)
         return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
 
     def monthly(self):
@@ -190,4 +204,6 @@ class IntervalTicksView(BrowserView):
         '''
         logger.log(LOGGING_LEVEL, 'Firing IntervalTicksMonthlyEvent')
         notify(IntervalTicksMonthlyEvent(context=self.context))
+        if HAS_PROTECT:
+            alsoProvides(self.request, IDisableCSRFProtection)
         return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
