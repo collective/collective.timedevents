@@ -38,7 +38,7 @@ setup(name='collective.timedevents',
       ),
       install_requires=[
           'setuptools',
-          'zope.app.session',
+          'zope.session',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

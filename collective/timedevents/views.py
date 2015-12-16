@@ -23,7 +23,8 @@ try:
 except ImportError:
     HAS_PROTECT = False
 from Products.Five.browser import BrowserView
-from zope.app.session.session import SessionData, PersistentSessionDataContainer
+from zope.session.session import SessionData
+from zope.session.session import PersistentSessionDataContainer
 
 # Local imports
 from events import TickEvent
