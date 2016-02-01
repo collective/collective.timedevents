@@ -4,14 +4,15 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix brown bag release
+  [tomgross]
 
 
 1.0 (2016-01-30)
 ----------------
 
 - Plone 5 compatibility
-  [karalics]
+  [karalics, tomgross]
 
 
 0.3 (2013-12-14)
