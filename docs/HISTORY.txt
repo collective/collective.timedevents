@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1 (unreleased)
-----------------
+1.0.3 (2016-02-01)
+------------------
 
 - One final attempt to include HISTORY.txt into egg
   [tomgross]
