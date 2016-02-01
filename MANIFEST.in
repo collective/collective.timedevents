@@ -1,5 +1,5 @@
 graft collective/
-graft docs/
+include docs/*.txt
 global-exclude *.pyc *.pyo
 global-exclude .project
 global-exclude .pydevproject
