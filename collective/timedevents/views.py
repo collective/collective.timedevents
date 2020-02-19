@@ -15,7 +15,7 @@ import time
 # Zope imports
 from DateTime.DateTime import DateTime
 from zope.event import notify
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import alsoProvides
 try:
     from plone.protect.interfaces import IDisableCSRFProtection
@@ -27,18 +27,18 @@ from zope.session.session import SessionData
 from zope.session.session import PersistentSessionDataContainer
 
 # Local imports
-from events import TickEvent
-from events import (IntervalTicks15Event,
+from .events import TickEvent
+from .events import (IntervalTicks15Event,
                     IntervalTicksHourlyEvent,
                     IntervalTicksDailyEvent,
                     IntervalTicksWeeklyEvent,
                     IntervalTicksMonthlyEvent)
-from interfaces import IIntervalTicks
+from .interfaces import IIntervalTicks
 
 client_id = "collective.timedevents"
 package_id = "collective.timedevents"
 
-from events import LOGGING_LEVEL
+from .events import LOGGING_LEVEL
 logger = logging.getLogger('collective.timedevents')
 
 
@@ -147,6 +147,7 @@ class TickTriggerView(BrowserView):
         return "OK"
 
 
+@implementer(IIntervalTicks)
 class IntervalTicksView(BrowserView):
     """ Cron-style interval based ticking. A zope clockserver or
     cron-job triggers each of methods below. The timing is handled
@@ -157,7 +158,6 @@ class IntervalTicksView(BrowserView):
     view by url.
     """
 
-    implements(IIntervalTicks)
 
     def fifteenMinutes(self):
         '''
