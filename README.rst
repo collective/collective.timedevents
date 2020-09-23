@@ -88,7 +88,7 @@ A. Using the ITickEvent method:
 
             <subscriber
                   handler="myproduct.tickers.on_tick"
-                  for="collective.timedevents.intefaces.ITickEvent"
+                  for="collective.timedevents.interfaces.ITickEvent"
                 />
 
        </configure>
