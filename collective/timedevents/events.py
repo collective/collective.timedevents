@@ -16,7 +16,7 @@ import os
 import logging
 
 # Zope imports
-from zope.interface import implements
+from zope.interface import implementer
 from DateTime import DateTime
 from zope.component import adapter
 
@@ -39,10 +39,10 @@ LOGGING_LEVEL = {'DEBUG': logging.DEBUG,
                  }.get(os.environ.get('TICK_LOGGER_LEVEL', 'INFO').upper())
 
 
+@implementer(ITickEvent)
 class TickEvent(object):
     """This class implements the ITickEvent interface.
     """
-    implements(ITickEvent)
 
     def __init__(self, date_time, next_tick):
         self.date_time = DateTime(date_time)
@@ -59,57 +59,51 @@ def tick_logger(tick_event):
     l.log(LOGGING_LEVEL, '(%s) TICK detected.' % tick_event.date_time.ISO())
 
 
+@implementer(IIntervalTicksGenericEvent)
 class IntervalTicksGenericEvent(object):
     '''
     IntervalTicks generic event
     '''
 
-    implements(IIntervalTicksGenericEvent)
-
     def __init__(self, context):
         self.context = context
 
 
+@implementer(IIntervalTicks15Event)
 class IntervalTicks15Event(IntervalTicksGenericEvent):
     '''
     An Event that will be fired every 15 minutes from a cronjob
 
     '''
 
-    implements(IIntervalTicks15Event)
 
-
+@implementer(IIntervalTicksHourlyEvent)
 class IntervalTicksHourlyEvent(IntervalTicksGenericEvent):
     '''
     An Event that will be fired hourly from a cronjob
 
     '''
 
-    implements(IIntervalTicksHourlyEvent)
 
-
+@implementer(IIntervalTicksDailyEvent)
 class IntervalTicksDailyEvent(IntervalTicksGenericEvent):
     '''
     An Event that will be fired daily from a cronjob
 
     '''
 
-    implements(IIntervalTicksDailyEvent)
 
-
+@implementer(IIntervalTicksWeeklyEvent)
 class IntervalTicksWeeklyEvent(IntervalTicksGenericEvent):
     '''
     An Event that will be fired weekly from a cronjob
 
     '''
 
-    implements(IIntervalTicksWeeklyEvent)
 
-
+@implementer(IIntervalTicksMonthlyEvent)
 class IntervalTicksMonthlyEvent(IntervalTicksGenericEvent):
     '''
     An Event that will be fired monthly from a cronjob
 
     '''
-
-    implements(IIntervalTicksMonthlyEvent)
