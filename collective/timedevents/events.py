@@ -21,7 +21,7 @@ from DateTime import DateTime
 from zope.component import adapter
 
 # Local imports
-from interfaces import (ITickEvent,
+from collective.timedevents.interfaces import (ITickEvent,
                         IIntervalTicksGenericEvent,
                         IIntervalTicks15Event,
                         IIntervalTicksHourlyEvent,

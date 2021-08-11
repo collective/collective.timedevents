@@ -27,18 +27,18 @@ from zope.session.session import SessionData
 from zope.session.session import PersistentSessionDataContainer
 
 # Local imports
-from events import TickEvent
-from events import (IntervalTicks15Event,
+from collective.timedevents.events import TickEvent
+from collective.timedevents.events import (IntervalTicks15Event,
                     IntervalTicksHourlyEvent,
                     IntervalTicksDailyEvent,
                     IntervalTicksWeeklyEvent,
                     IntervalTicksMonthlyEvent)
-from interfaces import IIntervalTicks
+from collective.timedevents.interfaces import IIntervalTicks
 
 client_id = "collective.timedevents"
 package_id = "collective.timedevents"
 
-from events import LOGGING_LEVEL
+from collective.timedevents.events import LOGGING_LEVEL
 logger = logging.getLogger('collective.timedevents')
 
 
