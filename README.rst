@@ -150,14 +150,14 @@ This product fills the following quality criteria:
 Author
 ------
 
--  ``Mikko Ohtamaa <http://opensourcehacker.com>``\ \_
+-  Mikko Ohtamaa `<http://opensourcehacker.com> <http://opensourcehacker.com>`_
 
 -  Quintagroup
 
 -  Sune Brøndum Wøller
 
--  The orignal concept and code was created by Tomasz Cobata Tomasz J.
-   Kotarba tomasz@kotarba.net.
+-  The orignal concept and code was created by Tomasz J.
+   Kotarba <tomasz@kotarba.net> of `SYSTEM7 <http://system7.IT>`_.
 
 -  ``Twinapex Research, Oulu, Finland <http://www.twinapex.com>``\ \_ -
    High quality Python hackers for hire
