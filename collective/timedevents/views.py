@@ -17,8 +17,10 @@ from DateTime.DateTime import DateTime
 from zope.event import notify
 from zope.interface import implementer
 from zope.interface import alsoProvides
+
 try:
     from plone.protect.interfaces import IDisableCSRFProtection
+
     HAS_PROTECT = True
 except ImportError:
     HAS_PROTECT = False
@@ -28,22 +30,25 @@ from zope.session.session import PersistentSessionDataContainer
 
 # Local imports
 from collective.timedevents.events import TickEvent
-from collective.timedevents.events import (IntervalTicks15Event,
-                    IntervalTicksHourlyEvent,
-                    IntervalTicksDailyEvent,
-                    IntervalTicksWeeklyEvent,
-                    IntervalTicksMonthlyEvent)
+from collective.timedevents.events import (
+    IntervalTicks15Event,
+    IntervalTicksHourlyEvent,
+    IntervalTicksDailyEvent,
+    IntervalTicksWeeklyEvent,
+    IntervalTicksMonthlyEvent,
+)
 from collective.timedevents.interfaces import IIntervalTicks
 
 client_id = "collective.timedevents"
 package_id = "collective.timedevents"
 
 from collective.timedevents.events import LOGGING_LEVEL
-logger = logging.getLogger('collective.timedevents')
+
+logger = logging.getLogger("collective.timedevents")
 
 
 class TickData:
-    """ Persistent information about ticking. """
+    """Persistent information about ticking."""
 
     def __init__(self, interval):
         self.interval = interval
@@ -55,7 +60,7 @@ sdc = PersistentSessionDataContainer()
 
 
 class TickTriggerView(BrowserView):
-    """ View that is called by Zope clock server.
+    """View that is called by Zope clock server.
 
     Clock server pulse calls this view regularly. View check whether we have
     enough interval since the last event burst and calls event handlers.
@@ -68,7 +73,7 @@ class TickTriggerView(BrowserView):
     interval = 10
 
     def getTickData(self):
-        """ Lazily initialize run-time tick data.
+        """Lazily initialize run-time tick data.
 
         We need to store process shared data somewhere.
         """
@@ -99,7 +104,7 @@ class TickTriggerView(BrowserView):
         return self.getTickData()["last_tick"]
 
     def tick(self):
-        """ Perform tick event firing when needed. """
+        """Perform tick event firing when needed."""
         # Check current time.
         current = DateTime()
 
@@ -121,12 +126,16 @@ class TickTriggerView(BrowserView):
         # execute _notify(). Otherwise do nothing.
         if current.timeTime() - last.timeTime() >= 0.9 * interval:
             self.setLastTick(current)
-            notify(TickEvent(current, self.getNextTickEstimation(
-                last_tick=current, interval=interval)))
+            notify(
+                TickEvent(
+                    current,
+                    self.getNextTickEstimation(last_tick=current, interval=interval),
+                )
+            )
 
     def getNextTickEstimation(self, last_tick=None, interval=None):
         """This method tries to estimate a time when a next tick will occur.
-           Then it returns a DateTime object representing that time.
+        Then it returns a DateTime object representing that time.
         """
         if last_tick is None:
             last_tick = DateTime(self.getLastTick())
@@ -149,7 +158,7 @@ class TickTriggerView(BrowserView):
 
 @implementer(IIntervalTicks)
 class IntervalTicksView(BrowserView):
-    """ Cron-style interval based ticking. A zope clockserver or
+    """Cron-style interval based ticking. A zope clockserver or
     cron-job triggers each of methods below. The timing is handled
     by clockserver or cron, not here.
 
@@ -158,53 +167,52 @@ class IntervalTicksView(BrowserView):
     view by url.
     """
 
-
     def fifteenMinutes(self):
-        '''
+        """
         cron job every 15 minutes
-        '''
-        logger.log(LOGGING_LEVEL, 'Firing IntervalTicks15Event')
+        """
+        logger.log(LOGGING_LEVEL, "Firing IntervalTicks15Event")
         notify(IntervalTicks15Event(context=self.context))
         if HAS_PROTECT:
             alsoProvides(self.request, IDisableCSRFProtection)
-        return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
+        return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def hourly(self):
-        '''
+        """
         Hourly cron job
-        '''
-        logger.log(LOGGING_LEVEL, 'Firing IntervalTicksHourlyEvent')
+        """
+        logger.log(LOGGING_LEVEL, "Firing IntervalTicksHourlyEvent")
         notify(IntervalTicksHourlyEvent(context=self.context))
         if HAS_PROTECT:
             alsoProvides(self.request, IDisableCSRFProtection)
-        return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
+        return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def daily(self):
-        '''
+        """
         Daily cron job
-        '''
-        logger.log(LOGGING_LEVEL, 'Firing IntervalTicksDailyEvent')
+        """
+        logger.log(LOGGING_LEVEL, "Firing IntervalTicksDailyEvent")
         notify(IntervalTicksDailyEvent(context=self.context))
         if HAS_PROTECT:
             alsoProvides(self.request, IDisableCSRFProtection)
-        return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
+        return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def weekly(self):
-        '''
+        """
         weekly cron job
-        '''
-        logger.log(LOGGING_LEVEL, 'Firing IntervalTicksWeeklyEvent')
+        """
+        logger.log(LOGGING_LEVEL, "Firing IntervalTicksWeeklyEvent")
         notify(IntervalTicksWeeklyEvent(context=self.context))
         if HAS_PROTECT:
             alsoProvides(self.request, IDisableCSRFProtection)
-        return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
+        return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def monthly(self):
-        '''
+        """
         monthly cron job
-        '''
-        logger.log(LOGGING_LEVEL, 'Firing IntervalTicksMonthlyEvent')
+        """
+        logger.log(LOGGING_LEVEL, "Firing IntervalTicksMonthlyEvent")
         notify(IntervalTicksMonthlyEvent(context=self.context))
         if HAS_PROTECT:
             alsoProvides(self.request, IDisableCSRFProtection)
-        return 'done: %s' % time.strftime('%Y%m%d-%H:%M', time.localtime())
+        return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
