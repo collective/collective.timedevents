@@ -11,14 +11,17 @@ __license__ = "GPL"
 __docformat__ = "epytext"
 
 from AccessControl import Unauthorized
-from Products.Five import zcml
 from zope import component
-from zope.app.testing import placelesssetup
-from Products.Five import fiveconfigure
 from AccessControl.ImplPython import ZopeSecurityPolicy
 from AccessControl.SecurityManager import setSecurityPolicy
+from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from unittest import TestCase
 
-from interfaces import (
+from collective.timedevents.interfaces import (
     ITickEvent,
     IIntervalTicks15Event,
     IIntervalTicksHourlyEvent,
@@ -26,24 +29,26 @@ from interfaces import (
     IIntervalTicksWeeklyEvent,
     IIntervalTicksMonthlyEvent,
 )
-from Products.PloneTestCase import PloneTestCase as ptc
-
-from Products.PloneTestCase.layer import onsetup
 
 
-@onsetup
-def setup():
-    fiveconfigure.debug_mode = True
-    import collective.timedevents
+class Fixture(PloneSandboxLayer):
 
-    zcml.load_config("configure.zcml", collective.timedevents)
-    fiveconfigure.debug_mode = False
+    defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        import collective.timedevents
+
+        self.loadZCML(package=collective.timedevents)
+
+    def setUpPloneSite(self, portal):
+        setRoles(portal, TEST_USER_ID, ["Manager"])
 
 
-# The order here is important.
-placelesssetup.setUp()
-setup()
-ptc.setupPloneSite(products=["collective.timedevents"])
+FIXTURE = Fixture()
+FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(FIXTURE,), name="collective.timedevents:Functional"
+)
+
 
 INTERVALVIEWS = [
     ("@@tick_fifteen", IIntervalTicks15Event),
@@ -54,23 +59,23 @@ INTERVALVIEWS = [
 ]
 
 
-class TickTestCase(ptc.PloneTestCase):
+class TickTestCase(TestCase):
     """Test ticking services
 
     TODO: Add test for next/last tick code.
     """
 
-    def afterSetUp(self):
+    layer = FUNCTIONAL_TESTING
+
+    def setUp(self):
         # Set verbose security policy, making debugging Unauthorized
         # exceptions great deal easier in unit tests
         setSecurityPolicy(ZopeSecurityPolicy(verbose=True))
-
-    def tearDown(self):
-        ptc.PloneTestCase.tearDown(self)
+        self.portal = self.layer["portal"]
 
     def test_url(self):
         """Test that the tick view URL is exposed properly."""
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
         portal = self.portal
 
         view = portal.restrictedTraverse("@@tick")
@@ -78,29 +83,28 @@ class TickTestCase(ptc.PloneTestCase):
 
     def test_urls(self):
         """Test that the tick view URL is exposed properly."""
-        self.loginAsPortalOwner()
-        portal = self.portal
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
 
         for v in INTERVALVIEWS:
-            view = portal.restrictedTraverse(v[0])
+            view = self.portal.restrictedTraverse(v[0])
             view()
 
     def test_security(self):
         """Check that only admin can execute tick."""
+        setRoles(self.portal, TEST_USER_ID, [])
         try:
-            portal = self.portal
-            portal.restrictedTraverse("@@tick")
+            self.portal.restrictedTraverse("@@tick")
             raise AssertionError("Anonymous could tick")
         except Unauthorized:
             pass
 
     def test_security_intervals(self):
-        """Check that only admin can execute tick."""
+        """Check that only admin can execute tick interval views."""
+        setRoles(self.portal, TEST_USER_ID, [])
         for v in INTERVALVIEWS:
             try:
-                portal = self.portal
-                portal.restrictedTraverse(v[0])
-                raise AssertionError("Anonymous could tick")
+                self.portal.restrictedTraverse(v[0])
+                raise AssertionError("Anonymous could tick: " + v[0])
             except Unauthorized:
                 pass
 
@@ -118,9 +122,8 @@ class TickTestCase(ptc.PloneTestCase):
         component.getSiteManager().registerHandler(my_tick, [ITickEvent])
 
         # First
-        self.loginAsPortalOwner()
-        portal = self.portal
-        view = portal.restrictedTraverse("@@tick")
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        view = self.portal.restrictedTraverse("@@tick")
         view()
 
         self.assertEqual(success, True)
@@ -151,9 +154,8 @@ class TickTestCase(ptc.PloneTestCase):
         component.getSiteManager().registerHandler(my_tick, [v[1]])
 
         # First
-        self.loginAsPortalOwner()
-        portal = self.portal
-        view = portal.restrictedTraverse(v[0])
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        view = self.portal.restrictedTraverse(v[0])
         view()
 
         self.assertEqual(success, True)

@@ -19,3 +19,6 @@ lib/
 local.cfg
 parts/
 var/
+*.swp
+pyvenv.cfg
+.idea

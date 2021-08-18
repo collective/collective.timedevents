@@ -7,6 +7,9 @@ Changelog
 - Add Python 3 & Plone 5.2 compatibility
   [boulch]
 
+- Use github CI for automated testing
+  [tomgross]
+
 
 1.0.3 (2016-02-01)
 ------------------
