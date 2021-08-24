@@ -13,16 +13,11 @@ setup(
     # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Framework :: Plone",
-        "Framework :: Plone :: 4.0",
-        "Framework :: Plone :: 4.1",
-        "Framework :: Plone :: 4.2",
         "Framework :: Plone :: 4.3",
-        "Framework :: Plone :: 5.0",
         "Framework :: Plone :: 5.1",
         "Framework :: Plone :: 5.2",
         "Framework :: Plone :: Addon",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
@@ -39,14 +34,13 @@ setup(
     zip_safe=False,
     extras_require=dict(
         test=[
-            "Products.PloneTestCase",
-            "zope.app.testing",
+            "plone.app.testing",
+            "plone.app.contenttypes [test]"
         ]
     ),
     install_requires=[
         "setuptools",
-        "zope.session",
-        # -*- Extra requirements: -*-
+        "zope.session"
     ],
     entry_points="""
       # -*- Entry points: -*-
