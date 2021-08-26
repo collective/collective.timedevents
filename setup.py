@@ -22,7 +22,8 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "License :: OSI Approved :: GNU General Public License (GPL)"
+        "License :: OSI Approved :: GNU General Public License (GPL)",
+        "Development Status :: 5 - Production/Stable"
     ],
     keywords="plone zope event clock time subscriber date day",
     author="Mikko Ohtamaa",
