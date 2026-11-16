@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 import os
 
 version = "1.2.dev0"
@@ -30,8 +30,7 @@ setup(
     author_email="mikko.ohtamaa@twinapex.com",
     url="http://plone.org/products/collective-timedevents",
     license="GPL",
-    packages=find_packages(exclude=["ez_setup"]),
-    namespace_packages=["collective"],
+    packages=find_namespace_packages(include=["collective.*"]),
     include_package_data=True,
     zip_safe=False,
     extras_require=dict(
