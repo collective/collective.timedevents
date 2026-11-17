@@ -1,12 +1,31 @@
 Changelog
 =========
 
-1.2 (unreleased)
-----------------
+2.0.0 (unreleased)
+------------------
+
+Breaking changes:
+
+- Native namespace package (PEP 420): ``collective/__init__.py`` is gone.
+  Python 3.10 to 3.13, Plone 6.1 and 6.2 only. Applications on Python 2 or
+  older Plone releases must stay on 1.1.
+  [bsuttor]
+
+New features:
 
 - Use ``importlib.metadata`` instead of ``pkg_resources``, which setuptools 81+
-  deprecates and setuptools 84 (Plone 6.2.3) no longer ships. Python 2.7 still
-  falls back to ``pkg_resources``.
+  deprecates and setuptools 84 (Plone 6.2.3) no longer ships.
+  [bsuttor]
+
+Internal:
+
+- Configure with plone.meta: tox test matrix (Plone 6.2.3 and 6.1, Python 3.10
+  to 3.13), GitHub Actions, pre-commit. Package metadata moved to
+  ``pyproject.toml``, ``src/`` layout, ``plone.autoinclude`` entry point.
+  [bsuttor]
+
+- ``make install`` builds a uv development environment on Plone 6.2.3.
+  Travis, buildout configuration and the hand-written GitHub workflow are gone.
   [bsuttor]
 
 

@@ -1,5 +1,5 @@
 """
-    Exposed URLs for sending time based events.
+Exposed URLs for sending time based events.
 
 """
 
@@ -9,40 +9,28 @@ __license__ = "GPL"
 __docformat__ = "epytext"
 
 
+from collective.timedevents.events import IntervalTicks15Event
+from collective.timedevents.events import IntervalTicksDailyEvent
+from collective.timedevents.events import IntervalTicksHourlyEvent
+from collective.timedevents.events import IntervalTicksMonthlyEvent
+from collective.timedevents.events import IntervalTicksWeeklyEvent
+from collective.timedevents.events import LOGGING_LEVEL
+from collective.timedevents.events import TickEvent
+from collective.timedevents.interfaces import IIntervalTicks
+from DateTime.DateTime import DateTime
+from plone.protect.interfaces import IDisableCSRFProtection
+from Products.Five.browser import BrowserView
+from zope.event import notify
+from zope.interface import alsoProvides
+from zope.interface import implementer
+from zope.session.session import PersistentSessionDataContainer
+from zope.session.session import SessionData
+
 import logging
 import time
 
-# Zope imports
-from DateTime.DateTime import DateTime
-from zope.event import notify
-from zope.interface import implementer
-from zope.interface import alsoProvides
-
-try:
-    from plone.protect.interfaces import IDisableCSRFProtection
-
-    HAS_PROTECT = True
-except ImportError:
-    HAS_PROTECT = False
-from Products.Five.browser import BrowserView
-from zope.session.session import SessionData
-from zope.session.session import PersistentSessionDataContainer
-
-# Local imports
-from collective.timedevents.events import TickEvent
-from collective.timedevents.events import (
-    IntervalTicks15Event,
-    IntervalTicksHourlyEvent,
-    IntervalTicksDailyEvent,
-    IntervalTicksWeeklyEvent,
-    IntervalTicksMonthlyEvent,
-)
-from collective.timedevents.interfaces import IIntervalTicks
-
 client_id = "collective.timedevents"
 package_id = "collective.timedevents"
-
-from collective.timedevents.events import LOGGING_LEVEL
 
 logger = logging.getLogger("collective.timedevents")
 
@@ -173,8 +161,7 @@ class IntervalTicksView(BrowserView):
         """
         logger.log(LOGGING_LEVEL, "Firing IntervalTicks15Event")
         notify(IntervalTicks15Event(context=self.context))
-        if HAS_PROTECT:
-            alsoProvides(self.request, IDisableCSRFProtection)
+        alsoProvides(self.request, IDisableCSRFProtection)
         return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def hourly(self):
@@ -183,8 +170,7 @@ class IntervalTicksView(BrowserView):
         """
         logger.log(LOGGING_LEVEL, "Firing IntervalTicksHourlyEvent")
         notify(IntervalTicksHourlyEvent(context=self.context))
-        if HAS_PROTECT:
-            alsoProvides(self.request, IDisableCSRFProtection)
+        alsoProvides(self.request, IDisableCSRFProtection)
         return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def daily(self):
@@ -193,8 +179,7 @@ class IntervalTicksView(BrowserView):
         """
         logger.log(LOGGING_LEVEL, "Firing IntervalTicksDailyEvent")
         notify(IntervalTicksDailyEvent(context=self.context))
-        if HAS_PROTECT:
-            alsoProvides(self.request, IDisableCSRFProtection)
+        alsoProvides(self.request, IDisableCSRFProtection)
         return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def weekly(self):
@@ -203,8 +188,7 @@ class IntervalTicksView(BrowserView):
         """
         logger.log(LOGGING_LEVEL, "Firing IntervalTicksWeeklyEvent")
         notify(IntervalTicksWeeklyEvent(context=self.context))
-        if HAS_PROTECT:
-            alsoProvides(self.request, IDisableCSRFProtection)
+        alsoProvides(self.request, IDisableCSRFProtection)
         return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())
 
     def monthly(self):
@@ -213,6 +197,5 @@ class IntervalTicksView(BrowserView):
         """
         logger.log(LOGGING_LEVEL, "Firing IntervalTicksMonthlyEvent")
         notify(IntervalTicksMonthlyEvent(context=self.context))
-        if HAS_PROTECT:
-            alsoProvides(self.request, IDisableCSRFProtection)
+        alsoProvides(self.request, IDisableCSRFProtection)
         return "done: %s" % time.strftime("%Y%m%d-%H:%M", time.localtime())

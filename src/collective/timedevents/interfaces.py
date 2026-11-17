@@ -1,5 +1,5 @@
 """
-    Time based events
+Time based events
 
 """
 
@@ -9,7 +9,8 @@ __license__ = "GPL"
 __docformat__ = "epytext"
 
 
-from zope.interface import Interface, Attribute
+from zope.interface import Attribute
+from zope.interface import Interface
 
 
 class ITickEvent(Interface):

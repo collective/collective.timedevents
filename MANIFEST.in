@@ -1,6 +1,3 @@
-graft collective
-include docs/*.txt *.cfg Makefile requirements.txt
-global-exclude *.pyc *.pyo
-global-exclude .project
-global-exclude .pydevproject
-exclude pyvenv.cfg .coveragerc .installed.cfg
+graft src/collective
+include *.rst
+global-exclude *.pyc
