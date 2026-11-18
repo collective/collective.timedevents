@@ -1,7 +1,7 @@
 """
-    Time based events
+Time based events
 
-    http://www.twinapex.com
+http://www.twinapex.com
 
 """
 
@@ -11,25 +11,19 @@ __license__ = "GPL"
 __docformat__ = "epytext"
 
 
-# Python imports
-import os
-import logging
-
-# Zope imports
-from zope.interface import implementer
+from collective.timedevents.interfaces import IIntervalTicks15Event
+from collective.timedevents.interfaces import IIntervalTicksDailyEvent
+from collective.timedevents.interfaces import IIntervalTicksGenericEvent
+from collective.timedevents.interfaces import IIntervalTicksHourlyEvent
+from collective.timedevents.interfaces import IIntervalTicksMonthlyEvent
+from collective.timedevents.interfaces import IIntervalTicksWeeklyEvent
+from collective.timedevents.interfaces import ITickEvent
 from DateTime import DateTime
 from zope.component import adapter
+from zope.interface import implementer
 
-# Local imports
-from collective.timedevents.interfaces import (
-    ITickEvent,
-    IIntervalTicksGenericEvent,
-    IIntervalTicks15Event,
-    IIntervalTicksHourlyEvent,
-    IIntervalTicksDailyEvent,
-    IIntervalTicksWeeklyEvent,
-    IIntervalTicksMonthlyEvent,
-)
+import logging
+import os
 
 LOGGING_LEVEL = {
     "DEBUG": logging.DEBUG,
@@ -43,7 +37,7 @@ LOGGING_LEVEL = {
 
 
 @implementer(ITickEvent)
-class TickEvent(object):
+class TickEvent:
     """This class implements the ITickEvent interface."""
 
     def __init__(self, date_time, next_tick):
@@ -57,12 +51,12 @@ def tick_logger(tick_event):
     ticks.
     """
 
-    l = logging.getLogger("collective.timedevents")
-    l.log(LOGGING_LEVEL, "(%s) TICK detected." % tick_event.date_time.ISO())
+    logger = logging.getLogger("collective.timedevents")
+    logger.log(LOGGING_LEVEL, "(%s) TICK detected." % tick_event.date_time.ISO())
 
 
 @implementer(IIntervalTicksGenericEvent)
-class IntervalTicksGenericEvent(object):
+class IntervalTicksGenericEvent:
     """
     IntervalTicks generic event
     """

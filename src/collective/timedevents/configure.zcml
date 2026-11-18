@@ -1,0 +1,63 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    >
+
+  <include
+      package="Products.CMFCore"
+      file="permissions.zcml"
+      />
+
+  <browser:page
+      name="tick"
+      for="*"
+      class=".views.TickTriggerView"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="tick_fifteen"
+      for="*"
+      class=".views.IntervalTicksView"
+      attribute="fifteenMinutes"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="tick_hourly"
+      for="*"
+      class=".views.IntervalTicksView"
+      attribute="hourly"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="tick_daily"
+      for="*"
+      class=".views.IntervalTicksView"
+      attribute="daily"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="tick_weekly"
+      for="*"
+      class=".views.IntervalTicksView"
+      attribute="weekly"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="tick_monthly"
+      for="*"
+      class=".views.IntervalTicksView"
+      attribute="monthly"
+      permission="cmf.ManagePortal"
+      />
+
+  <subscriber
+      for=".interfaces.ITickEvent"
+      handler="collective.timedevents.events.tick_logger"
+      />
+
+</configure>

@@ -1,7 +1,7 @@
 """
-    Unit testing for collective.timedevents
+Unit testing for collective.timedevents
 
-    http://www.twinapex.com
+http://www.twinapex.com
 
 """
 
@@ -11,24 +11,21 @@ __license__ = "GPL"
 __docformat__ = "epytext"
 
 from AccessControl import Unauthorized
-from zope import component
 from AccessControl.ImplPython import ZopeSecurityPolicy
 from AccessControl.SecurityManager import setSecurityPolicy
+from collective.timedevents.interfaces import IIntervalTicks15Event
+from collective.timedevents.interfaces import IIntervalTicksDailyEvent
+from collective.timedevents.interfaces import IIntervalTicksHourlyEvent
+from collective.timedevents.interfaces import IIntervalTicksMonthlyEvent
+from collective.timedevents.interfaces import IIntervalTicksWeeklyEvent
+from collective.timedevents.interfaces import ITickEvent
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from unittest import TestCase
-
-from collective.timedevents.interfaces import (
-    ITickEvent,
-    IIntervalTicks15Event,
-    IIntervalTicksHourlyEvent,
-    IIntervalTicksDailyEvent,
-    IIntervalTicksWeeklyEvent,
-    IIntervalTicksMonthlyEvent,
-)
+from zope import component
 
 
 class Fixture(PloneSandboxLayer):
