@@ -7,8 +7,8 @@ Changelog
 Breaking changes:
 
 - Native namespace package (PEP 420): ``collective/__init__.py`` is gone.
-  Python 3.10 to 3.13, Plone 6.1 and 6.2 only. Applications on Python 2 or
-  older Plone releases must stay on 1.1.
+  Plone 6.1 on Python 3.10 to 3.13, and Plone 6.2 on Python 3.10 to 3.14,
+  only. Applications on Python 2 or older Plone releases must stay on 1.1.
   [bsuttor]
 
 New features:
@@ -19,9 +19,10 @@ New features:
 
 Internal:
 
-- Configure with plone.meta: tox test matrix (Plone 6.2.3 and 6.1, Python 3.10
-  to 3.13), GitHub Actions, pre-commit. Package metadata moved to
-  ``pyproject.toml``, ``src/`` layout, ``plone.autoinclude`` entry point.
+- Configure with plone.meta: tox test matrix (Plone 6.2.3 on Python 3.10 to
+  3.14, Plone 6.1 on Python 3.10 to 3.13), GitHub Actions, pre-commit. Package
+  metadata moved to ``pyproject.toml``, ``src/`` layout, ``plone.autoinclude``
+  entry point.
   [bsuttor]
 
 - ``make install`` builds a uv development environment on Plone 6.2.3.

@@ -135,8 +135,8 @@ configure.zcml.
 Development
 -----------
 
-Plone 6.1 and 6.2, Python 3.10 to 3.13. The development environment uses
-`uv <https://docs.astral.sh/uv/>`_::
+Plone 6.1 on Python 3.10 to 3.13, and Plone 6.2 on Python 3.10 to 3.14. The
+development environment uses `uv <https://docs.astral.sh/uv/>`_::
 
     make install       # Plone 6.2.3 in .venv (PLONE_VERSION=... to override)
     make create-site   # Create a Plone site
